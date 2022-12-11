@@ -11,21 +11,21 @@ bin_PROGRAMS = mpegtest
 # bin_PROGRAMS.
 # <binary_name>_LDADD is used to pass extra parameters at link time, such as
 # libraries that need to be linked in.
-mpegtest_LDADD = -ltsduck
+mpegtest_LDADD = -ltsduck -lpcsclite -lpthread -lrt -ldl -lm -lstdc++
 # <binary_name>_LDFLAGS is used to pass extra parameters at compilation time,
 # such as the paths to libraries that are needed that are not in the default
 # paths.
 # If the user supplies a directory where libpcap is installed, the contents
 # of the variable setup in configire.in will be substituted below so the
 # library file will be found.
-mpegtest_LDFLAGS = -L/usr/lib -L/usr/lib/tsduck
+mpegtest_LDFLAGS = 
 # <binary_name>_SOURCES takes a space delimited list of the source code files
 # that need to be compiled/linked to build the binary.
-mpegtest_SOURCES = mpegtest.cpp
+mpegtest_SOURCES = mpegtest.cpp outputhandler.cpp
 # The INCLUDES macro allows us to tell the tools where needed header files are
 # located if they aren't in the default paths. In this case it's a subdirectory
 # in the source code directory where all the header files are centrally located.
 # If the user supplies a directory where libpcap is installed, the contents
 # of the variable setup in configire.in will be substituted below so the
 # header file will be found.
-INCLUDES = -I../include -I/usr/include/tsduck -I/usr/include/PCSC
+mpegtest_CPPFLAGS = -I../include $(shell tsconfig --cflags)

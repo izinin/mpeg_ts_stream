@@ -7,19 +7,11 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "-I../include","-I/usr/include/tsduck","-I/usr/include/PCSC","--std=c++11",
+                "mpegtest.cpp","outputhandler.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
-                "-I",
-                "/usr/include/tsduck",
-                "-I",
-                "/usr/include/PCSC",
-                "-L",
-                "/usr/lib",
-                "-L",
-                "/usr/lib/tsduck",
-                "-l",
-                "tsduck"
+                "${fileDirname}/mpegtest",
+                "-ltsduck","-lpcsclite","-lpthread","-lrt","-ldl","-lm","-lstdc++",
             ],
             "options": {
                 "cwd": "${fileDirname}"

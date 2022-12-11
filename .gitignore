@@ -51,6 +51,6 @@ Makefile
 ## the project specific below
 src/.deps
 src/mpegtest
-src/mpegtest.o
+*.o
 # do not store 100M file that is available online , see 'stream_source/mux1rai.ts:Zone.Identifier'
 stream_source/mux1rai.ts
