@@ -47,4 +47,4 @@ make
 ### NOTES
 * TSDuck uses VERSION typedef this clashes with VERSION macro required by Automake. We need workaroud to not using VERSION in Automake 
 * to setup vcode debbuger: `g++ -g -Wall -I/usr/include/tsduck -I/usr/include/PCSC -Ltsduck src/mpegtest.cpp -o test`
-
+* how to find IP multicast adresses in Windows : `netsh interface ip show joins` -- 

@@ -18,7 +18,7 @@ int TSApp(int argc, char* argv[])
     opt.app_name = u"myexec";  // for error messages only.
 
     // Input plugin. Here, read an IP multicast stream.
-    opt.input = {u"ip", {u"230.1.2.3:5555"}};
+    opt.input = {u"ip", {u"224.0.0.251:45000"}};
 
     // Packet processing plugins. Here, stop processig after 1000 TS packets.
     opt.plugins = {
