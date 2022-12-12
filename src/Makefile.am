@@ -21,7 +21,7 @@ mpegtest_LDADD = -ltsduck -lpcsclite -lpthread -lrt -ldl -lm -lstdc++
 mpegtest_LDFLAGS = 
 # <binary_name>_SOURCES takes a space delimited list of the source code files
 # that need to be compiled/linked to build the binary.
-mpegtest_SOURCES = mpegtest.cpp outputhandler.cpp
+mpegtest_SOURCES = mpegtest.cpp outputhandler.cpp tspacketresult.cpp
 # The INCLUDES macro allows us to tell the tools where needed header files are
 # located if they aren't in the default paths. In this case it's a subdirectory
 # in the source code directory where all the header files are centrally located.

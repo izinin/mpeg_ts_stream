@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <functional>
 
 #include "tsduck.h"
 #include "outputhandler.h"
@@ -20,16 +21,24 @@ TS_MAIN(TSApp);
 
 int TSApp(int argc, char* argv[])
 {
+    struct sigaction sigIntHandler;
 
 #ifdef USELOCALSTREAM    
     pthread_t thread;
     int ret = pthread_create( &thread, NULL, startTestStream, NULL);
     pthread_join( thread, NULL);
 #endif
-
     // Use an asynchronous logger to report errors, logs, debug, etc.
     ts::AsyncReport report;
     OutputHandler output(report);
+
+    __sighandler_t handler = &OutputHandler::userInterruptHandler;
+    sigIntHandler.sa_handler = handler;
+    sigemptyset(&sigIntHandler.sa_mask);
+    sigIntHandler.sa_flags = 0;
+
+    sigaction(SIGINT, &sigIntHandler, NULL);
+
     ts::TSProcessor tsproc(report);
     tsproc.registerEventHandler(&output, ts::PluginType::OUTPUT);
 
@@ -56,6 +65,8 @@ int TSApp(int argc, char* argv[])
     if (!tsproc.start(opt)) {
         return EXIT_FAILURE;
     }
+
+    report.info(u"\t\t.. running please ctrl+c to stop and see the report", {});
 
     // And wait for TS processing termination.
     tsproc.waitForTermination();
