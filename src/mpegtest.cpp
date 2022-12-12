@@ -51,10 +51,8 @@ int TSApp(int argc, char* argv[])
     // CMD > netsh interface ip show joins
     opt.input = {u"ip", {u"224.0.0.251:45000"}};
 
-    // Packet processing plugins. Here, stop processig after 1000 TS packets.
     opt.plugins = {
-        {u"count", {}},
-        // {u"pes", {u"-v"}},
+        {u"pes", {u"-v"}},
     };
 
     // Memory (output) plugin sends TS packets to the calling application using memory buffers. 

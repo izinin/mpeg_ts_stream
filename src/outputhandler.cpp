@@ -21,7 +21,7 @@ OutputHandler::~OutputHandler()
 
 void OutputHandler::userInterruptHandler(int s){
     if(s == SIGINT){
-        std::sort(resultCounter.begin(), resultCounter.end(), [](TSpacketResult* a, TSpacketResult* b)
+        sort(resultCounter.begin(), resultCounter.end(), [](TSpacketResult* a, TSpacketResult* b)
             { return (a->progId < b->progId);});
         for (auto p : resultCounter)
         {
@@ -49,8 +49,7 @@ void OutputHandler::handlePluginEvent(const PluginEventContext& context)
             // skip PSI tables or Conditional Access Table (CAT)
             continue;
         }
-
-        auto found = std::find_if(resultCounter.begin(), resultCounter.end(),[&currPid](TSpacketResult* x)
+        auto found = find_if(resultCounter.begin(), resultCounter.end(),[&currPid](TSpacketResult* x)
             { return x->progId == currPid; });
         TSpacketResult* item = NULL;
         if(found == resultCounter.end()){
@@ -59,8 +58,9 @@ void OutputHandler::handlePluginEvent(const PluginEventContext& context)
         } else {
             item = found[0];
         }
-        if(p.hasPCR()){
-            item->incrPcrCounter();
+        item->bitrateCollectData(p.hasPCR(), p.getPCR());
+        if(p.getPESHeaderSize() == 0){  // see PES packet size length field https://en.wikipedia.org/wiki/Packetized_elementary_stream
+            item->incrVideoCounter();
         }
         // ostringstream oss;
         // p.display(oss, TSPacket::DUMP_PES_HEADER);

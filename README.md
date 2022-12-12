@@ -49,5 +49,7 @@ make
 * to setup vcode debbuger: `g++ -g -Wall -I/usr/include/tsduck -I/usr/include/PCSC -Ltsduck src/mpegtest.cpp -o test`
 * how to find IP multicast adresses in Windows : `netsh interface ip show joins`
 * for tsduck config details use `tsconfig --help`
-* get information about TS : `tsp -v -I file mux1rai.ts  -P pes -v -O drop` 
+* get information about TS from file: `tsp -v -I file stream_source/mux1rai.ts  -P pes -v -O drop` 
+* get information about TS from UDP streaming: `tsp -v -I ip 224.0.0.251:45000  -P pes -v -O drop` 
+
 

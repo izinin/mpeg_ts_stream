@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "-I../include","-I/usr/include/tsduck","-I/usr/include/PCSC","--std=c++11",
-                "mpegtest.cpp","outputhandler.cpp",
+                "mpegtest.cpp","outputhandler.cpp", "tspacketresult.cpp",
                 "-o",
                 "${fileDirname}/mpegtest",
                 "-ltsduck","-lpcsclite","-lpthread","-lrt","-ldl","-lm","-lstdc++",
